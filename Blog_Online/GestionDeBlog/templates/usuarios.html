@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Gestion de Usuarios
+{% endblock title %}
+
+{% block imagen %} {% static 'assets/img/usuarios.jpg' %} {% endblock imagen %}
+
+{% block titulo_principal %}
+    <h1>Gestion de Usuarios</h1>
+{% endblock titulo_principal %}
+
+{% block barra_busqueda %}{% endblock barra_busqueda %}
+
+{% block contenido %} 
+    <div class="container">
+        <div class="register">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <h2 class="title"> Gestion de Usuarios</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-button p-2">
+                        <a class="btn btn-primary" href={% url 'registrarusuario' %} role="button">Crear Usuario</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list">
+            <h2> Listado de Usuarios </h2>
+            <div class="list-content">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th> # </th>
+                            <th> Username </th>
+                            <th> Nombres </th>
+                            <th> Apellidos </th>
+                            <th> Correo Electronico </th>
+                            <th colspan="2"> Opciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for u in usuarioslistados %}
+                            <tr class="tr-tbody">
+                                <td> {{forloop.counter}} </td>
+                                <td> {{u.username}} </td>
+                                <td> {{u.first_name}} </td>
+                                <td> {{u.last_name}} </td>
+                                <td> {{u.email}} </td>
+                                <td><a href="edicionusuario/{{ u.username }}"> <button class="btn btn-info"> Editar </button> </a></td>
+                                <td><a href="eliminarusuario/{{ u.username }}"> <button class="btn btn-danger btnEliminar"> Eliminar </button> </a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

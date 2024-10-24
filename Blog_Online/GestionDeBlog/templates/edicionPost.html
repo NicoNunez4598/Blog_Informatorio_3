@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Gestion de Posts
+{% endblock title %}
+
+{% block imagen %} {% static 'assets/img/posts.jpg' %} {% endblock imagen %}
+
+{% block titulo_principal %}
+    Gestion de Posts
+{% endblock titulo_principal %}
+
+{% block barra_busqueda %}{% endblock barra_busqueda %}
+
+{% block contenido %} 
+    <div class="row">
+        <div class="col-md-12 offset-md-12">
+            <h2> Gestion de Posts </h2>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/editarpost/" method="POST">{% csrf_token %}
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Id</label>
+                            <input type="text" id="numberid" name="numberid" value="{{post.id}}" class="form-control" placeholder="Id" readonly>
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+                            <input type="text" id="txtTitulo" name="txtTitulo" value="{{post.titulo}}" class="form-control" placeholder="Titulo">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Slug</label>
+                            <input type="text" id="txtSlug" name="txtSlug" value="{{post.slug}}" class="form-control" placeholder="Slug">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
+                            <input type="text" id="txtDescripcion" name="txtDescripcion" value="{{post.descripcion}}" class="form-control" placeholder="Descripcion">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Contenido</label>
+                            <input type="text" id="txtContenido" name="txtContenido" value="{{post.contenido}}" class="form-control" placeholder="Contenido">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">URL Imagen</label>
+                            <input type="text" id="txtImagen" name="txtImagen" value="{{post.imagen}}" class="form-control" placeholder="URL Imagen">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Autor</label>
+                            <input type="text" id="txtAutor" name="txtAutor" value="{{post.autor}}" class="form-control" placeholder="Autor" readonly>
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Categoria</label>
+                            <input type="text" id="txtCategoria" name="txtCategoria" value="{{post.categoria}}" class="form-control" placeholder="Categoria" readonly>
+                        </div>
+                        <div class="card-item">
+                            <button type="submit" class="btn btn-success btn-block text-white"> Guardar </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

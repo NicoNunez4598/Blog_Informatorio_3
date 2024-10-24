@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Gestion de Post
+{% endblock title %}
+
+{% block imagen %} {% static 'assets/img/post.jpg' %} {% endblock imagen %}
+
+{% block titulo_principal %}
+    Gestion de Post
+{% endblock titulo_principal %}
+
+{% block barra_busqueda %}{% endblock barra_busqueda %}
+
+{% block contenido %} 
+    <div class="container">
+        <div class="register">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <h2 class="title"> Gestion de Post </h2>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/registrarpost/" method="POST">{% csrf_token %}
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+                            <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" placeholder="Titulo">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Slug</label>
+                            <input type="text" id="txtSlug" name="txtSlug" class="form-control" placeholder="Slug">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
+                            <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" placeholder="Descripcion">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Contenido</label>
+                            <input type="text" id="txtContenido" name="txtContenido" class="form-control" placeholder="Contenido">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">URL Imagen</label>
+                            <input type="text" id="txtImagen" name="txtImagen" class="form-control" placeholder="URL Imagen">
+                        </div>
+                            <div class="mb-3">
+                                <label for="categorias" class="form-label">Selecciona una categoría:</label>
+                                <select id="categorias" name="categoria" class="form-select">
+                                    <option value="">--Selecciona una opción--</option>
+                                        {% for c in categoriaslistadas %}
+                                            <option value="{{c.id}}">{{ c.nombre }}</option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+                        <div class="card-item">
+                            <button type="submit" class="btn btn-success btn-block text-white"> Guardar </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="list">
+            <h2> Listado de Post </h2>
+            <div class="list-content">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th> # </th>
+                            <th> Titulo </th>
+                            <th> Slug </th>
+                            <th> Autor </th>
+                            <th colspan="2"> Opciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in postslistados %}
+                            <tr class="tr-tbody">
+                                <td> {{forloop.counter}} </td>
+                                <td> {{p.titulo}} </td>
+                                <td> {{p.slug}} </td>
+                                <td> {{p.autor}} </td>
+                                <td><a href="edicionpost/{{ p.id }}"> <button class="btn btn-info"> Editar </button> </a></td>
+                                <td><a href="eliminarpost/{{ p.id }}"> <button class="btn btn-danger btnEliminar"> Eliminar </button> </a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

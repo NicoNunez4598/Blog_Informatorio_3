@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Gestion de Usuarios
+{% endblock title %}
+
+{% block imagen %} {% static 'assets/img/usuarios.jpg' %} {% endblock imagen %}
+
+{% block titulo_principal %}
+    Gestion de Usuarios
+{% endblock titulo_principal %}
+
+{% block barra_busqueda %}{% endblock barra_busqueda %}
+
+{% block contenido %} 
+    <div class="row">
+        <div class="col-md-12 offset-md-12">
+            <h2> Gestion de Usuarios </h2>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/editarusuario/" method="POST">{% csrf_token %}
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Username</label>
+                            <input type="text" id="username" name="username" value="{{usuario.username}}" class="form-control" placeholder="Username" readonly>
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Nombres</label>
+                            <input type="text" id="txtNombres" name="txtNombres" value="{{usuario.first_name}}" class="form-control" placeholder="Nombres">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Apellidos</label>
+                            <input type="text" id="txtApellidos" name="txtApellidos" value="{{usuario.last_name}}" class="form-control" placeholder="Apellidos">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
+                            <input type="email" id="email" name="email" value="{{usuario.email}}" class="form-control" placeholder="Correo Electronico">
+                        </div>
+                        <div class="card-item">
+                            <button type="submit" class="btn btn-success btn-block text-white"> Guardar </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

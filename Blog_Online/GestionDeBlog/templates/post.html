@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ detallepost.titulo }}
+{% endblock title %}
+
+{% block imagen %} {{detallepost.imagen}} {% endblock imagen %}
+
+{% block titulo_principal %}
+    <h2>{{ detallepost.titulo }}</h2>
+    <p>{{ detallepost.descripcion }}</p>
+{% endblock titulo_principal %}
+
+{% block barra_busqueda %}{% endblock barra_busqueda %}
+
+{% block contenido %}
+    {{detallepost.contenido | safe}}
+    <hr noshade="noshade" size="2" width="100%" />
+    {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-12 offset-md-12">
+                <h2> Comentarios</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/registrarcomentario/{{detallepost.id}}/" method="POST">{% csrf_token %}
+                            <div class="card-item">
+                                <label for="exampleFormControlInput1" class="form-label">Contenido</label>
+                                <input type="text" id="txtContenido" name="txtContenido" class="form-control" placeholder="Contenido">
+                            </div>
+                            <div class="card-item">
+                                <button type="submit" class="btn btn-success btn-block text-white"> Guardar </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <hr noshade="noshade" size="2" width="100%" />
+    <div class="list">
+            <h2> Comentarios </h2>
+            <div class="list-content">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th> # </th>
+                            <th> Contenido </th>
+                            <th> Autor </th>
+                            <th colspan="2"> Opciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in comentarioslistados %}
+                            <tr class="tr-tbody">
+                                <td> {{forloop.counter}} </td>
+                                <td> {{c.contenido}} </td>
+                                <td> {{c.autor}} </td>
+                                {% if c.autor == user or user.is_superuser or detallepost.autor == user %}
+                                    <td><a href={% url 'eliminarcomentario' id=c.id %}> <button class="btn btn-danger btnEliminar"> Eliminar </button> </a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock contenido %}
