@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!zat*w0h-rdej2kj4@8nub=)5b)8)3+b**2t#*e6=jc6$a65oh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -137,13 +137,13 @@ USE_TZ = True
 
 STATIC_URL = '/Blog_Online/GestionDeBlog/static/'
 
-STATICFILES_DIR = [BASE_DIR / 'static']
+STATICFILES_DIR = [BASE_DIR / 'static',]
 
-STATIC_ROOT = '/Blog_Online/GestionDeBlog/staticfiles/'
+STATIC_ROOT = '../Blog_Online/GestionDeBlog/staticfiles/'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = '/Blog_Online/GestionDeBlog/media/'
+MEDIA_ROOT = '../Blog_Online/GestionDeBlog/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
