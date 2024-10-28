@@ -21,6 +21,10 @@ class Categoria(models.Model):
         return self.nombre
 
 class Usuario(AbstractUser):
+    
+    categoria_choices = [('Colaborador', 'Colaborador'), ('Registrado', 'Registrado')]
+    
+    categoria = models.CharField('Nombre de la Categoria', choices=categoria_choices, default='Registrado', help_text="Define una categoria para el usuario", max_length=100, null=False, blank=False)
 
     REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 

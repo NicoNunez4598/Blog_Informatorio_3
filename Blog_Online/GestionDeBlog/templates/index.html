@@ -33,7 +33,7 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'realidadAumentada' %}>R.A.</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'educacionAmbiental' %}>Eduación Ambiental</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'rvyraenea' %}>R.V. y R.A. en E.A.</a></li>
-                        {% if request.user.is_authenticated and user.username == 'admin' %}
+                        {% if request.user.is_superuser or request.user.categoria == 'Colaborador' %}
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     ¿Que quieres hacer?
@@ -51,7 +51,6 @@
                                     ¿Que quieres hacer?
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href={% url 'posts' %}>Gestion de Post</a></li>
                                     <li><a class="dropdown-item" href={% url 'edicionusuario' request.user.username %}>Editar Usuario</a></li>
                                 </ul>
                             </div>

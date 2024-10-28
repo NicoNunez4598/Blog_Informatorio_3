@@ -197,8 +197,9 @@ def usuarios(request):
     return render(request, 'usuarios.html', {"usuarioslistados" : usuarioslistados})
 
 def registrarusuario(request):
+    default_data = {'categoria': 'Colaborador'}
     data = {
-        'form' : CustomUserCreationForm2()
+        'form' : CustomUserCreationForm2(initial=default_data)
     }
     if request.method == 'POST':
         user_creation_form_2 = CustomUserCreationForm2(data=request.POST)
@@ -244,10 +245,8 @@ def eliminarusuario(request, username):
     return redirect('usuarios')
 
 def posts(request):
-    if request.user.is_superuser:
+    if request.user.is_superuser or request.user.categoria == 'Colaborador':
         postslistados = Post.objects.all()
-    elif request.user.is_authenticated:
-        postslistados = Post.objects.filter(autor=request.user) 
     categoriaslistadas = Categoria.objects.all()
     return render(request, 'posts.html', {"postslistados" : postslistados, "categoriaslistadas" : categoriaslistadas})
 
@@ -308,8 +307,9 @@ def eliminarpost(request, id):
     return redirect('posts')
 
 def register(request):
+    default_data = {'categoria': 'Registrado'}
     data = {
-        'form' : CustomUserCreationForm()
+        'form' : CustomUserCreationForm(initial=default_data)
     }
     if request.method == 'POST':
         user_creation_form = CustomUserCreationForm(data=request.POST)
