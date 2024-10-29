@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Contacto
+{% endblock title %}
+
+{% block imagen %} {% static 'assets/img/contacto.jpg' %} {% endblock imagen %}
+
+{% block titulo_principal %}
+    Contacto
+{% endblock titulo_principal %}
+
+{% block barra_busqueda %}{% endblock barra_busqueda %}
+
+{% block contenido %} 
+    <div class="container">
+        <div class="register">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <h2 class="title"> Contactanos </h2>
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="POST">{% csrf_token %}
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                            <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
+                            <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="card-item">
+                            <label for="exampleFormControlInput1" class="form-label">Mensaje</label>
+                            <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="card-item">
+                            <button type="submit" class="btn btn-success btn-block text-white"> Enviar </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock contenido %}

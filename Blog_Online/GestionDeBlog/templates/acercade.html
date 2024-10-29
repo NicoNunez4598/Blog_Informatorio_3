@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Acerca de Nosotros
+{% endblock title %}
+
+{% block imagen %} {% static 'assets/img/acercade.jpg' %} {% endblock imagen %}
+
+{% block titulo_principal %}
+    <h1>Acerca de Nosotros</h1>
+{% endblock titulo_principal %}
+
+{% block barra_busqueda %}{% endblock barra_busqueda %}
+
+{% block contenido %} 
+    <div class="container">
+        <div class="register">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <h2 class="title"> Acerca de Nosotros </h2> 
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-button p-2">
+                        <h3>Nicolas Nuñez</h3>
+                        <h4>Estudiante de la Comision 6 Grupo 5 del Informatorio 2024.</h4>
+                        <h3>Laura Ovando</h3>
+                        <h4>Estudiante de la Comision 6 Grupo 5 del Informatorio 2024.</h4>
+                        <h5>Realizamos este proyecto sin fines de lucro, con el fin de demostrar todo lo aprendido y obtener la aprobación de la segunda instancia del informatorio 2024.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock contenido %}

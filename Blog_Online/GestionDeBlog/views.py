@@ -34,6 +34,12 @@ def home(request):
     post = paginator.get_page(page)
     return render(request, 'index.html', {'post':post})
 
+def acercade(request):
+    return render(request, 'acercade.html')
+
+def contacto(request):
+    return render(request, 'contacto.html')
+
 def generales(request):
     queryset = request.GET.get("buscar")
     post = Post.objects.filter(estado = True, categoria = Categoria.objects.get(nombre__iexact = 'Generales'))
